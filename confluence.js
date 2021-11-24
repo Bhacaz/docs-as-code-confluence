@@ -1,5 +1,3 @@
-const markdownForFile = require('./markdownToHtml')
-
 class SyncConfluence {
     constructor(confluenceApi, spaceId) {
         this.spaceId = spaceId;
@@ -18,6 +16,16 @@ class SyncConfluence {
         })
     }
 
+    getPageVersion(pageId, cb) {
+        return this.confluenceApi.getContentById(pageId, (err, data) => {
+            if (err) {
+                console.error(err)
+            } else {
+                cb(data.version.number)
+            }
+        })
+    }
+
     createEmptyParentPage(title, parentId) {
         return new Promise((resolve) => {
             this.confluenceApi.postContent(this.spaceId, title, '', parentId, (err, data) => {
@@ -30,8 +38,16 @@ class SyncConfluence {
         })
     }
 
-
-
+    putContent(pageId, title, content) {
+        this.getPageVersion(pageId, (version) => {
+            console.log(version)
+            this.confluenceApi.putContent(this.spaceId, pageId, version + 1, title, content, (err, data) => {
+                if (err) {
+                    console.error(err)
+                }
+            }, false, 'editor2')
+        })
+    }
 }
 
 module.exports = SyncConfluence;

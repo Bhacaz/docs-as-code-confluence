@@ -56,6 +56,7 @@
 const Confluence = require("confluence-api");
 const filesStructure = require('./files')
 const SyncConflence = require("./confluence")
+const markdownForFile = require('./markdownToHtml')
 
 const root = './docs/';
 const spaceId = "~661332374";
@@ -94,9 +95,10 @@ async function main() {
         for(const subPath of f) {
             if (subPath.includes('.md')) {
                 let pageTitle = subPath.replace('.md', '')
-                // markdownForFile(root + path, (data, err) => {
-                //     // console.log(data);
-                // })
+                let contentPageId = await findOrCreatePage(pageTitle, currentParentPageId)
+                markdownForFile(root + path, (err, data) => {
+                    syncConfluence.putContent(contentPageId, pageTitle, data)
+                })
             } else {
                 currentParentPageId = await findOrCreatePage(subPath, currentParentPageId)
             }
@@ -105,4 +107,3 @@ async function main() {
 }
 
 main()
-
