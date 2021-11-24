@@ -72,7 +72,20 @@ const syncConfluence = new SyncConflence(confluenceAPI, spaceId, rootParentPageI
 
 const cachedPageIdByTitle = {};
 
-function findOrCreatePage(title, parentPageId) {}
+async function findOrCreatePage(pageTitle, parentPageId) {
+    let pageId;
+    if (cachedPageIdByTitle[pageTitle]) {
+        pageId = cachedPageIdByTitle[pageTitle];
+    } else {
+        pageId = await syncConfluence.getPageIdByTitle(pageTitle)
+        if (pageId) {
+        } else {
+            pageId = await syncConfluence.createEmptyParentPage(pageTitle, parentPageId)
+        }
+        cachedPageIdByTitle[pageTitle] = pageId
+    }
+    return pageId;
+}
 
 async function main() {
     for (const f of filesStructure(root)) {
@@ -81,23 +94,11 @@ async function main() {
         for(const subPath of f) {
             if (subPath.includes('.md')) {
                 let pageTitle = subPath.replace('.md', '')
-
                 // markdownForFile(root + path, (data, err) => {
                 //     // console.log(data);
                 // })
             } else {
-                let pageTitle = subPath
-                if (cachedPageIdByTitle[pageTitle]) {
-                    currentParentPageId = cachedPageIdByTitle[pageTitle];
-                } else {
-                    let pageId = await syncConfluence.getPageIdByTitle(pageTitle)
-                    if (pageId) {
-                        currentParentPageId = pageId;
-                    } else {
-                        currentParentPageId = await syncConfluence.createEmptyParentPage(pageTitle, currentParentPageId)
-                    }
-                    cachedPageIdByTitle[pageTitle] = pageId
-                }
+                currentParentPageId = await findOrCreatePage(subPath, currentParentPageId)
             }
         }
     }
