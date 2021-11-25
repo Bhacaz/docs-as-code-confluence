@@ -2,6 +2,9 @@
 
 Publish a folder of documentation to Confluence.
 
+Create a Confluence Page for each markdown file. Each folder will create a _parent_ page to reflect
+the directory structure.
+
 ## Parameters
 
 | Name | Description | Required |
