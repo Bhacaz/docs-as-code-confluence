@@ -13,7 +13,10 @@ const config = {
   password: core.getInput("password", { required: true }),
   baseUrl: core.getInput("confluence-base-url", { required: true }),
 };
-
+console.log(config)
+console.log(root)
+console.log(spaceId)
+console.log(rootParentPageId)
 const confluenceAPI = new Confluence(config);
 const syncConfluence = new SyncConflence(
   confluenceAPI,
