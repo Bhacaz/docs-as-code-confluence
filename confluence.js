@@ -54,7 +54,6 @@ class SyncConfluence {
 
   putContent(pageId, title, content) {
     this.getPageVersion(pageId, (version) => {
-      console.log(version);
       this.confluenceApi.putContent(
         this.spaceId,
         pageId,

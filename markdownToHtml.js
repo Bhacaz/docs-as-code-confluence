@@ -7,7 +7,6 @@ const markdownForFile = (path, cb) => {
       console.error(err);
       return;
     }
-    console.log(data);
     Marked.parse(data, cb);
   });
 };
