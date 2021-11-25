@@ -6,18 +6,18 @@ inputs:
     description: 'Folder containing the documentation to publish.'
     required: true
   username:
-    description: 'Confluence username'
+    description: 'Confluence username or email'
     required: true
   password:
     description: 'Confluence password or API key'
     required: true
-  confluenceBaseUrl:
+  confluence-base-url:
     description: 'Your Confluence url'
     required: true
-  spaceId:
+  space-id:
     description: 'Confluence space id to publish the documentation'
     required: true
-  parentPageId:
+  parent-page-id:
     description: 'Page id under which the documentation will be published'
     required: true
 runs:

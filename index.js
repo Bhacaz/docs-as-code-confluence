@@ -2,15 +2,16 @@ const Confluence = require("confluence-api");
 const filesStructure = require('./files')
 const SyncConflence = require("./confluence")
 const markdownToHtml = require('./markdownToHtml')
+const core = require('@actions/core');
 
-const root = './docs/';
-const spaceId = "~661332374";
-const rootParentPageId = "1028915542";
+const root = './' + core.getInput("folder", { required: true }) + '/';
+const spaceId = core.getInput("space-id", { required: true });
+const rootParentPageId = core.getInput("parent-page-id", { required: true });
 
 const config = {
-    username: "jfbastien@petalmd.com",
-    password: "",
-    baseUrl:  "https://petalmd.atlassian.net/wiki"
+    username: core.getInput("username", { required: true }),
+    password: core.getInput("password", { required: true }),
+    baseUrl:  core.getInput("confluence-base-url", { required: true })
 };
 
 const confluenceAPI = new Confluence(config);

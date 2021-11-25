@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@actions/core": "^1.6.0",
     "confluence-api": "^1.4.0",
     "marked": "^4.0.0"
   }
