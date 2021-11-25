@@ -13,7 +13,11 @@ class SyncConfluence {
           if (err) {
             console.error(err);
           } else {
-            resolve(data.results[0]?.id);
+            if (data.results[0]) {
+              resolve(data.results[0].id);
+            } else {
+              resolve(undefined);
+            }
           }
         }
       );
