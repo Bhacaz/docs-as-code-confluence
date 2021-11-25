@@ -9,7 +9,7 @@ const rootParentPageId = "1028915542";
 
 const config = {
     username: "jfbastien@petalmd.com",
-    password: "vFPMWOKtsrFBn5XHro10BC4E",
+    password: "",
     baseUrl:  "https://petalmd.atlassian.net/wiki"
 };
 

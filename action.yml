@@ -1,0 +1,25 @@
+name: 'Docs as Code - Confluence'
+description: 'Publish the content of a folder to confluence'
+author: 'Bhacaz'
+inputs:
+  folder:
+    description: 'Folder containing the documentation to publish.'
+    required: true
+  username:
+    description: 'Confluence username'
+    required: true
+  password:
+    description: 'Confluence password or API key'
+    required: true
+  confluenceBaseUrl:
+    description: 'Your Confluence url'
+    required: true
+  spaceId:
+    description: 'Confluence space id to publish the documentation'
+    required: true
+  parentPageId:
+    description: 'Page id under which the documentation will be published'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
