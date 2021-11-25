@@ -13,6 +13,12 @@ Publish a folder of documentation to Confluence.
 | `space-id` | Confluence space id to publish the documentation. | true |
 | `parent-page-id` | Page id under which the documentation will be published | true |
 
+## TODO
+
+* Renaming a file
+* Moving/Removing a file
+* Not updating Confluence pages when there is no change
+
 ## Example of workflow
 
 ```yml
