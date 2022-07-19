@@ -41,6 +41,16 @@ async function findOrCreatePage(pageTitle, parentPageId) {
   return pageId;
 }
 
+async function uploadAttachment(attachmentSource, pageId) {
+  const existingAttachments = await syncConfluence.getAttachments(pageId)
+  for (let attachment of existingAttachments) {
+    if (attachment.title === path.basename(attachmentSource)) {
+      return await syncConfluence.updateAttachment(pageId, attachment.id, attachmentSource);
+    }
+  }
+  return await syncConfluence.uploadAttachment(pageId, attachmentSource);
+}
+
 async function main() {
   for (const f of filesStructure(root)) {
     let path = f.join("/");
@@ -52,8 +62,14 @@ async function main() {
           pageTitle,
           currentParentPageId
         );
-        markdownToHtml(root + path, (err, data) => {
-          syncConfluence.putContent(contentPageId, pageTitle, data);
+        markdownToHtml(root + path, async (err, data) => {
+          const html = parser.parse(data);
+          const images = html.querySelectorAll("img")
+          for (var image of images) {
+            var attachment = await uploadAttachment(image.getAttribute("src").replace("..", "."), contentPageId);
+            image.replaceWith(parser.parse('<ac:image><ri:attachment ri:filename=' + attachment.title +' /></ac:image>'));
+          }
+          syncConfluence.putContent(contentPageId, pageTitle, html.toString());
         });
       } else {
         currentParentPageId = await findOrCreatePage(
