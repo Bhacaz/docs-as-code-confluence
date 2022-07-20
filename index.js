@@ -45,9 +45,11 @@ async function findOrCreatePage(pageTitle, parentPageId) {
 
 async function uploadAttachment(attachmentSource, pageId) {
   const existingAttachments = await syncConfluence.getAttachments(pageId)
-  for (let attachment of existingAttachments) {
-    if (attachment.title === path.basename(attachmentSource)) {
-      return await syncConfluence.updateAttachment(pageId, attachment.id, attachmentSource);
+  if (existingAttachments) {
+    for (let attachment of existingAttachments) {
+      if (attachment.title === path.basename(attachmentSource)) {
+        return await syncConfluence.updateAttachment(pageId, attachment.id, attachmentSource);
+      }
     }
   }
   return await syncConfluence.uploadAttachment(pageId, attachmentSource);
