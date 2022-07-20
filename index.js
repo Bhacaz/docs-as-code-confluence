@@ -3,10 +3,12 @@ const filesStructure = require("./files");
 const SyncConflence = require("./confluence");
 const markdownToHtml = require("./markdownToHtml");
 const core = require("@actions/core");
+const parser = require("node-html-parser")
 
 const root = "./" + core.getInput("folder", { required: true }) + "/";
 const spaceId = core.getInput("space-id", { required: true });
 const rootParentPageId = core.getInput("parent-page-id", { required: true });
+const path = require('path')
 
 const config = {
   username: core.getInput("username", { required: true }),
