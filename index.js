@@ -3,6 +3,8 @@ const filesStructure = require("./files");
 const SyncConflence = require("./confluence");
 const markdownToHtml = require("./markdownToHtml");
 const core = require("@actions/core");
+const parser = require("node-html-parser")
+const path = require('path')
 
 const root = "./" + core.getInput("folder", { required: true }) + "/";
 const spaceId = core.getInput("space-id", { required: true });
@@ -41,6 +43,32 @@ async function findOrCreatePage(pageTitle, parentPageId) {
   return pageId;
 }
 
+async function uploadAttachment(attachmentSource, pageId) {
+  attachmentSource = root + attachmentSource;
+  const existingAttachments = await syncConfluence.getAttachments(pageId)
+  if (existingAttachments) {
+    for (let attachment of existingAttachments) {
+      if (attachment.title === path.basename(attachmentSource)) {
+        return await syncConfluence.updateAttachment(pageId, attachment.id, attachmentSource);
+      }
+    }
+  }
+  return await syncConfluence.uploadAttachment(pageId, attachmentSource);
+}
+
+async function handleAttachments(contentPageId, data) {
+  const html = parser.parse(data);
+  const images = html.querySelectorAll("img")
+  for (var image of images) {
+    const attachmentSource = image.getAttribute("src");
+    // TODO handle remote images
+    if (attachmentSource.includes("http")) { continue; }
+    var attachment = await uploadAttachment(attachmentSource.replace("..", "."), contentPageId);
+    image.replaceWith(parser.parse('<ac:image><ri:attachment ri:filename=' + attachment.title +' /></ac:image>'));
+  }
+  return html.toString()
+}
+
 async function main() {
   for (const f of filesStructure(root)) {
     let path = f.join("/");
@@ -52,8 +80,9 @@ async function main() {
           pageTitle,
           currentParentPageId
         );
-        markdownToHtml(root + path, (err, data) => {
-          syncConfluence.putContent(contentPageId, pageTitle, data);
+        markdownToHtml(root + path,  (err, data) => {
+          let htmlContent = handleAttachments(contentPageId, data);
+          syncConfluence.putContent(contentPageId, pageTitle, htmlContent);
         });
       } else {
         currentParentPageId = await findOrCreatePage(

@@ -15,6 +15,7 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "confluence-api": "^1.4.0",
-    "marked": "^4.0.0"
+    "marked": "^4.0.0",
+    "node-html-parser": "^5.3.3"
   }
 }

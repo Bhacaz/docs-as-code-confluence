@@ -70,6 +70,69 @@ class SyncConfluence {
       );
     });
   }
+
+  getAttachments(pageId) {
+    return new Promise((resolve) => {
+      this.confluenceApi.getAttachments(
+          this.spaceId,
+          pageId,
+          (err, data) => {
+            if (err) {
+              console.error(err);
+            } else {
+              if (data.results[0]) {
+                resolve(data.results);
+              } else {
+                resolve(undefined);
+              }
+            }
+          }
+      );
+    });
+  }
+
+  updateAttachment(pageId, attachmentId, source) {
+    return new Promise((resolve) => {
+      this.confluenceApi.updateAttachmentData(
+          this.spaceId,
+          pageId,
+          attachmentId,
+          source,
+          (err, data) => {
+            if (err) {
+              console.error(err);
+            } else {
+              if (data) {
+                resolve(data);
+              } else {
+                resolve(undefined);
+              }
+            }
+          }
+      );
+    });
+  }
+
+  uploadAttachment(pageId, source) {
+    return new Promise((resolve) => {
+      this.confluenceApi.createAttachment(
+          this.spaceId,
+          pageId,
+          source,
+          (err, data) => {
+            if (err) {
+              console.error(err);
+            } else {
+              if (data.results[0]) {
+                resolve(data.results[0]);
+              } else {
+                resolve(undefined);
+              }
+            }
+          }
+      );
+    });
+  }
 }
 
 module.exports = SyncConfluence;
