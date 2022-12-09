@@ -1,5 +1,6 @@
 export function getDefaults() {
   return {
+    async: false,
     baseUrl: null,
     breaks: false,
     extensions: null,
@@ -14,7 +15,6 @@ export function getDefaults() {
     sanitize: false,
     sanitizer: null,
     silent: false,
-    smartLists: false,
     smartypants: false,
     tokenizer: null,
     walkTokens: null,
