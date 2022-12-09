@@ -6,20 +6,20 @@ const core = require("@actions/core");
 const parser = require("node-html-parser")
 const path = require('path')
 
-const root = "./" + core.getInput("folder", { required: true }) + "/";
-const spaceId = core.getInput("space-id", { required: true });
-const rootParentPageId = core.getInput("parent-page-id", { required: true });
+const root = "./" + 'docs/' // core.getInput("folder", { required: true }) + "/";
+const spaceKey = '~661332374' // core.getInput("space-id", { required: true });
+const rootParentPageId = '1282506753' // core.getInput("parent-page-id", { required: true });
 
 const config = {
-  username: core.getInput("username", { required: true }),
-  password: core.getInput("password", { required: true }),
-  baseUrl: core.getInput("confluence-base-url", { required: true }),
+  username: 'jfbastien@petalmd.com', // core.getInput("username", { required: true }),
+  password: 'BmVpYrzsXp8lby9gx6UlDDB3', //core.getInput("password", { required: true }),
+  baseUrl: 'https://petalmd.atlassian.net/wiki' // core.getInput("confluence-base-url", { required: true }),
 };
 
 const confluenceAPI = new Confluence(config);
 const syncConfluence = new SyncConflence(
   confluenceAPI,
-  spaceId,
+  spaceKey,
   rootParentPageId
 );
 
@@ -66,7 +66,7 @@ async function handleAttachments(contentPageId, data) {
     var attachment = await uploadAttachment(attachmentSource.replace("..", "."), contentPageId);
     image.replaceWith(parser.parse('<ac:image><ri:attachment ri:filename=' + attachment.title +' /></ac:image>'));
   }
-  return html.toString()
+  return await html.toString()
 }
 
 async function main() {
@@ -81,7 +81,8 @@ async function main() {
           currentParentPageId
         );
         markdownToHtml(root + path,  (err, data) => {
-          let htmlContent = handleAttachments(contentPageId, data);
+          let htmlContent = await handleAttachments(contentPageId, data);
+          console.log(htmlContent);
           syncConfluence.putContent(contentPageId, pageTitle, htmlContent);
         });
       } else {

@@ -1,13 +1,13 @@
 class SyncConfluence {
-  constructor(confluenceApi, spaceId) {
-    this.spaceId = spaceId;
+  constructor(confluenceApi, spaceKey) {
+    this.spaceKey = spaceKey;
     this.confluenceApi = confluenceApi;
   }
 
   getPageIdByTitle(title) {
     return new Promise((resolve) => {
       this.confluenceApi.getContentByPageTitle(
-        this.spaceId,
+        this.spaceKey,
         title,
         (err, data) => {
           if (err) {
@@ -37,7 +37,7 @@ class SyncConfluence {
   createEmptyParentPage(title, parentId) {
     return new Promise((resolve) => {
       this.confluenceApi.postContent(
-        this.spaceId,
+        this.spaceKey,
         title,
         "",
         parentId,
@@ -55,7 +55,7 @@ class SyncConfluence {
   putContent(pageId, title, content) {
     this.getPageVersion(pageId, (version) => {
       this.confluenceApi.putContent(
-        this.spaceId,
+        this.spaceKey,
         pageId,
         version + 1,
         title,
@@ -74,7 +74,7 @@ class SyncConfluence {
   getAttachments(pageId) {
     return new Promise((resolve) => {
       this.confluenceApi.getAttachments(
-          this.spaceId,
+          this.spaceKey,
           pageId,
           (err, data) => {
             if (err) {
@@ -94,7 +94,7 @@ class SyncConfluence {
   updateAttachment(pageId, attachmentId, source) {
     return new Promise((resolve) => {
       this.confluenceApi.updateAttachmentData(
-          this.spaceId,
+          this.spaceKey,
           pageId,
           attachmentId,
           source,
@@ -116,7 +116,7 @@ class SyncConfluence {
   uploadAttachment(pageId, source) {
     return new Promise((resolve) => {
       this.confluenceApi.createAttachment(
-          this.spaceId,
+          this.spaceKey,
           pageId,
           source,
           (err, data) => {

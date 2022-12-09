@@ -17,8 +17,8 @@ inputs:
   confluence-base-url:
     description: "Your Confluence url"
     required: true
-  space-id:
-    description: "Confluence space id to publish the documentation"
+  space-key:
+    description: "Confluence space key to publish the documentation"
     required: true
   parent-page-id:
     description: "Page id under which the documentation will be published"
