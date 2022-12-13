@@ -80,8 +80,11 @@ async function main() {
           pageTitle,
           currentParentPageId
         );
-        markdownToHtml(root + path,  (err, data) => {
-          let htmlContent = handleAttachments(contentPageId, data);
+        markdownToHtml(root + path,  async (err, data) => {
+          if(err) {
+            console.log(err);
+          }
+          let htmlContent = await handleAttachments(contentPageId, data);
           syncConfluence.putContent(contentPageId, pageTitle, htmlContent);
         });
       } else {
