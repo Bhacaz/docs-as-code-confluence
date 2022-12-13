@@ -22,6 +22,7 @@ the directory structure.
 * Moving/Removing a file
 * Not updating Confluence pages when there is no change
 * Add commit link to the new page version
+* Add markdown images with url source
 
 ## Example of workflow
 
@@ -41,7 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Sync Docs as Code - Confluence
-        uses: Bhacaz/docs-as-code-confluence@main
+        uses: Bhacaz/docs-as-code-confluence@v1
         with:
           folder: docs
           username: abc@xyz.com
