@@ -42,7 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Sync Docs as Code - Confluence
-        uses: Bhacaz/docs-as-code-confluence@v1
+        uses: Bhacaz/docs-as-code-confluence@v2
         with:
           folder: docs
           username: abc@xyz.com
