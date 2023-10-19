@@ -47,7 +47,7 @@ jobs:
           username: abc@xyz.com
           password: ${{ secrets.API_TOKEN }}
           confluence-base-url: https://mydomain.atlassian.net/wiki
-          space-id: ~1234
+          space-key: ~1234
           parent-page-id: 123456789
 ```
 
