@@ -7,7 +7,7 @@ const parser = require("node-html-parser")
 const path = require('path')
 
 const root = "./" + core.getInput("folder", { required: true }) + "/";
-const spaceId = core.getInput("space-id", { required: true });
+const spaceKey = core.getInput("space-key", { required: true });
 const rootParentPageId = core.getInput("parent-page-id", { required: true });
 
 const config = {
@@ -19,7 +19,7 @@ const config = {
 const confluenceAPI = new Confluence(config);
 const syncConfluence = new SyncConflence(
   confluenceAPI,
-  spaceId,
+  spaceKey,
   rootParentPageId
 );
 
