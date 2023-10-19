@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* Rename space-id to space-key ([#6](https://github.com/Bhacaz/docs-as-code-confluence/pull/6))
+* Rename space-id to space-key ([#9](https://github.com/Bhacaz/docs-as-code-confluence/pull/9))
 * Upload images ([#5](https://github.com/Bhacaz/docs-as-code-confluence/pull/5))
 * Specified node version and updated dependencies ([#4](https://github.com/Bhacaz/docs-as-code-confluence/pull/4))
 
