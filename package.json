@@ -9,7 +9,7 @@
     "build": "ncc build index.js --license licenses.txt"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "engines": {
     "node": ">=20"
   },
