@@ -40,9 +40,9 @@ jobs:
     name: Sync Docs as Code - Confluence
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Sync Docs as Code - Confluence
-        uses: Bhacaz/docs-as-code-confluence@v2
+        uses: Bhacaz/docs-as-code-confluence@v3
         with:
           folder: docs
           username: abc@xyz.com
