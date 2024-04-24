@@ -5,17 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "ncc build index.js --license licenses.txt"
   },
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20"
   },
   "dependencies": {
     "@actions/core": "^1.6.0",
     "confluence-api": "^1.4.0",
     "marked": "^4.0.0",
     "node-html-parser": "^5.3.3"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
+    "jest": "^29.7.0"
   }
 }

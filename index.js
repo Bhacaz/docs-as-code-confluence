@@ -1,10 +1,11 @@
 const Confluence = require("confluence-api");
-const filesStructure = require("./files");
-const SyncConflence = require("./confluence");
-const markdownToHtml = require("./markdownToHtml");
 const core = require("@actions/core");
 const parser = require("node-html-parser")
 const path = require('path')
+
+const filesStructure = require("./utils/files");
+const SyncConfluence = require("./utils/confluence");
+const markdownToHtml = require("./utils/markdownToHtml");
 
 const root = "./" + core.getInput("folder", { required: true }) + "/";
 const spaceKey = core.getInput("space-key", { required: true });
@@ -17,7 +18,7 @@ const config = {
 };
 
 const confluenceAPI = new Confluence(config);
-const syncConfluence = new SyncConflence(
+const syncConfluence = new SyncConfluence(
   confluenceAPI,
   spaceKey,
   rootParentPageId
