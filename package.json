@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +17,8 @@
     "confluence-api": "^1.4.0",
     "marked": "^4.0.0",
     "node-html-parser": "^5.3.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
