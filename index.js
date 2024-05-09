@@ -71,6 +71,10 @@ async function handleAttachments(contentPageId, data) {
 }
 
 async function main() {
+  const files = filesStructure(root);
+  if (!files.length) {
+    console.log("No markdown files found in %s", root);
+  }
   for (const f of filesStructure(root)) {
     let path = f.join("/");
     let currentParentPageId = rootParentPageId;

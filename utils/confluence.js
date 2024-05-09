@@ -12,6 +12,7 @@ class SyncConfluence {
         (err, data) => {
           if (err) {
             console.error(err);
+            process.exit(1);
           } else {
             if (data.results[0]) {
               resolve(data.results[0].id);
@@ -28,6 +29,7 @@ class SyncConfluence {
     return this.confluenceApi.getContentById(pageId, (err, data) => {
       if (err) {
         console.error(err);
+        process.exit(1);
       } else {
         cb(data.version.number);
       }
@@ -44,6 +46,7 @@ class SyncConfluence {
         (err, data) => {
           if (err) {
             console.error(err);
+            process.exit(1);
           } else {
             resolve(data.id);
           }
@@ -63,7 +66,10 @@ class SyncConfluence {
         (err, data) => {
           if (err) {
             console.error(err);
-          }
+            process.exit(1);
+          } else {
+            console.log("Uploaded content successfuly to page %s", data._links.base + data._links.webui);
+          }          
         },
         false,
         "editor2"
@@ -79,6 +85,7 @@ class SyncConfluence {
           (err, data) => {
             if (err) {
               console.error(err);
+              process.exit(1);
             } else {
               if (data.results[0]) {
                 resolve(data.results);
@@ -101,6 +108,7 @@ class SyncConfluence {
           (err, data) => {
             if (err) {
               console.error(err);
+              process.exit(1);
             } else {
               if (data) {
                 resolve(data);
@@ -122,6 +130,7 @@ class SyncConfluence {
           (err, data) => {
             if (err) {
               console.error(err);
+              process.exit(1);s
             } else {
               if (data.results[0]) {
                 resolve(data.results[0]);
