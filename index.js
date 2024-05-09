@@ -75,7 +75,7 @@ async function main() {
   if (!files.length) {
     console.log("No markdown files found in %s", root);
   }
-  for (const f of filesStructure(root)) {
+  for (const f of files) {
     let path = f.join("/");
     let currentParentPageId = rootParentPageId;
     for (const subPath of f) {
