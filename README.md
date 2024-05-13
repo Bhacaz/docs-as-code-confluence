@@ -61,7 +61,7 @@ jobs:
 **Test**
 
 ```bash
-npm test
+npm run test
 ```
 
 **Build**
