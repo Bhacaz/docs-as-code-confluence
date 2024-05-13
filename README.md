@@ -55,3 +55,17 @@ jobs:
 ## Example of usage in a repository
 
 [Bhacaz/docs-as-code-confluence-demo](https://github.com/Bhacaz/docs-as-code-confluence-demo)
+
+## Development
+
+**Test**
+
+```bash
+npm test
+```
+
+**Build**
+
+```bash
+npm run build
+```
