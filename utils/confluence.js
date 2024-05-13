@@ -130,7 +130,7 @@ class SyncConfluence {
           (err, data) => {
             if (err) {
               console.error(err);
-              process.exit(1);s
+              process.exit(1);
             } else {
               if (data.results[0]) {
                 resolve(data.results[0]);
