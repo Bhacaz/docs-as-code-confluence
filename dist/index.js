@@ -18658,8 +18658,7 @@ class SyncConfluence {
         title,
         (err, data) => {
           if (err) {
-            console.error(err);
-            process.exit(1);
+            resolve(undefined);
           } else {
             if (data.results[0]) {
               resolve(data.results[0].id);
