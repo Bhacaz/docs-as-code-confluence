@@ -21890,6 +21890,12 @@ async function main() {
   for (const f of files) {
     let path = f.join("/");
     let currentParentPageId = rootParentPageId;
+    let pathsInRoot = root.split("/");
+    let newRoot= root;       
+    if(pathsInRoot.length > 1){
+        newRoot = pathsInRoot[0] + "/"
+        console.log("Root for action includes subfolder. Assigning root as: " +  newRoot)
+    }
     for (const subPath of f) {
       if (subPath.includes(".md")) {
         let pageTitle = subPath.replace(".md", "");
