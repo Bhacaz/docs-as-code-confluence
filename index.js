@@ -81,8 +81,7 @@ async function main() {
     let pathsInRoot = root.split("/");
     let newRoot= root;       
     if(pathsInRoot.length > 2){
-        newRoot = pathsInRoot[1] + "/"
-        console.log("Root for action includes subfolder. Assigning root as: " +  newRoot)
+        newRoot = "./" + pathsInRoot[1] + "/"
     }
     for (const subPath of f) {
       if (subPath.includes(".md")) {
