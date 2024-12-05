@@ -21903,7 +21903,7 @@ async function main() {
           pageTitle,
           currentParentPageId
         );
-        markdownToHtml(root + path,  async (err, data) => {
+        markdownToHtml(newRoot + path,  async (err, data) => {
           if(err) {
             console.log(err);
           }
