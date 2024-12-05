@@ -80,8 +80,8 @@ async function main() {
     let currentParentPageId = rootParentPageId;
     let pathsInRoot = root.split("/");
     let newRoot= root;       
-    if(pathsInRoot.length > 1){
-        newRoot = pathsInRoot[0] + "/"
+    if(pathsInRoot.length > 2){
+        newRoot = pathsInRoot[1] + "/"
         console.log("Root for action includes subfolder. Assigning root as: " +  newRoot)
     }
     for (const subPath of f) {
