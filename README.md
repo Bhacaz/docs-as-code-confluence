@@ -56,6 +56,11 @@ jobs:
 
 [Bhacaz/docs-as-code-confluence-demo](https://github.com/Bhacaz/docs-as-code-confluence-demo)
 
+## Alternatives
+
+* [https://github.com/markdown-confluence/publish-action](markdown-confluence/publish-action)
+* [https://github.com/mbovo/mark2confluence](markdown-confluence/publish-action)
+
 ## Development
 
 **Test**
